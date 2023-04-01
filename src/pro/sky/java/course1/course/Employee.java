@@ -33,40 +33,24 @@ public class Employee {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 
     public String getPatronymic() {
         return patronymic;
     }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
 
     public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public int getSalary() {
         return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
     }
 
     public int getId() {
@@ -77,23 +61,23 @@ public class Employee {
         return Arrays.toString(departments);
     }
 
+//    Setters
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public void setDepartment(int department) {
+        if (department > departments.length || department < 0) {
+            throw new IllegalArgumentException("Такого отдела не существует");
+        }
+        this.department = departments[department - 1];
+    }
 
 
-// ------------------ Закомментил сеттеры для утилитарных полей idCounter и setIdCounter и id и геттер для idCounter
-// т.к. содержат данные о работе механизма класса но по заданию требовалось
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+// ------------------ Закомментил геттер для idCounter
 //    public static int getIdCounter() {
 //        return idCounter;
 //    }
 //
-//    public static void setIdCounter(int idCounter) {
-//        Employee.idCounter = idCounter;
-//    }
-//
-//
-//    public static void setDepartments(String[] departments) {
-//        Employee.departments = departments;
-//    }
 }
