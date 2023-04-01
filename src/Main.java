@@ -20,12 +20,11 @@ public class Main {
         employees[3] = new Employee("Джугашвили", "Иосиф", "Виссарионович", "5", 1_000);
         employees[5] = new Employee("Хирохито", "Сёма", "Ёсихитович", "4", 100_000);
 
-        toIndexSalary(employees, 11);
-        showEmployeesData(employees);
-        findEmployeeWithMinSalaryOfDepartment(employees, "5");
-        findEmployeeWithMaxSalaryOfDepartment(employees, "5");
-        System.out.println(employees[0].getDepartments());
-
+//        toIndexSalary(employees, 11);
+//        showEmployeesData(employees);
+//        findEmployeeWithMinSalaryOfDepartment(employees, "5");
+//        findEmployeeWithMaxSalaryOfDepartment(employees, "5");
+        countSummarySalaryForDepartment(employees, "5");
     }
 //     ------------------------------------- DEFAULT METHODS AND DATA -------------------------------------
 
@@ -154,6 +153,22 @@ public class Main {
         } else {
             System.out.println("Сотрудник " + employeeName + " получает наибольшую зарплату в отделе " + department + " - " + maxSalary + "руб.");
         }
+
+
+    }
+
+    public static void countSummarySalaryForDepartment(Employee[] employees, String department) {
+        if (!employees[0].getDepartments().contains(department)) {
+            System.out.println("Такого отдела не существует");
+            return;
+        }
+        int summarySalary = 0;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment().equals(department)) {
+                summarySalary += employee.getSalary();
+            }
+        }
+        System.out.println("сумма затрат на заработную плату отделу " + department + " составляет - " + summarySalary + "руб.");
     }
 //    -------------------------------------    class end -------------------------------------
 }
