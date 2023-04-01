@@ -7,12 +7,12 @@ public class Main {
         employees[2] = new Employee("Селиванов", "Акакий", "Александрович", "4", 32000);
         employees[4] = new Employee("Кулиджи", "Казимир", "Космосович", "3", 42000);
 
-        System.out.println(findEmployeeMaxSalary(employees));
-        System.out.println(findEmployeeMinSalary(employees));
-        showEmployeesData(employees);
-        System.out.println(countMonthSalaryExpenses(employees));
-        System.out.println(countAverageMonthSalary(employees));
-        showEmployeesNames(employees);
+//        System.out.println(findEmployeeMaxSalary(employees));
+//        System.out.println(findEmployeeMinSalary(employees));
+//        showEmployeesData(employees);
+//        System.out.println(countMonthSalaryExpenses(employees));
+//        System.out.println(countAverageMonthSalary(employees));
+//        showEmployeesNames(employees);
 
         //     ------------------------------------- NEXT LEVEL CALLS AND DATA -------------------------------------
 
@@ -22,7 +22,9 @@ public class Main {
 
         toIndexSalary(employees, 11);
         showEmployeesData(employees);
-        findEmployeeWithMinSalaryOfDepartment(employees, "3");
+        findEmployeeWithMinSalaryOfDepartment(employees, "5");
+        findEmployeeWithMaxSalaryOfDepartment(employees, "5");
+        System.out.println(employees[0].getDepartments());
 
     }
 //     ------------------------------------- DEFAULT METHODS AND DATA -------------------------------------
@@ -111,6 +113,10 @@ public class Main {
     }
 
     public static void findEmployeeWithMinSalaryOfDepartment(Employee[] employees, String department) {
+        if (!employees[0].getDepartments().contains(department)) {
+            System.out.println("Такого отдела не существует");
+            return;
+        }
         int minSalary = 0;
         String employeeName = "";
         for (Employee employee : employees) {
@@ -127,8 +133,30 @@ public class Main {
             System.out.println("Сотрудник " + employeeName + " получает наименьшую зарплату в отделе " + department + " - " + minSalary + "руб.");
         }
     }
-}
+
+    public static void findEmployeeWithMaxSalaryOfDepartment(Employee[] employees, String department) {
+        if (!employees[0].getDepartments().contains(department)) {
+            System.out.println("Такого отдела не существует");
+            return;
+        }
+        int maxSalary = 0;
+        String employeeName = "";
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment().equals(department)) {
+                if (employee.getSalary() > maxSalary || maxSalary == 0) {
+                    maxSalary = employee.getSalary();
+                    employeeName = employee.getEmployeeInitials();
+                }
+            }
+        }
+        if (employeeName.equals("")) {
+            System.out.println("В указанном отделе нет сотрудников");
+        } else {
+            System.out.println("Сотрудник " + employeeName + " получает наибольшую зарплату в отделе " + department + " - " + maxSalary + "руб.");
+        }
+    }
 //    -------------------------------------    class end -------------------------------------
+}
 
 
 
