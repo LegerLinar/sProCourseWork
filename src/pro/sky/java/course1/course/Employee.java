@@ -79,9 +79,11 @@ public class Employee {
         return "Сотрудник - " + name + " " + surname + " " + patronymic + ". Отдел - " + department + ". Зарплата в мес. - " + salary;
     }
 
+//    ------------------------------------- class end -------------------------------------
     // ------------------ Закомментил геттер для idCounter
 //    public static int getIdCounter() {
 //        return idCounter;
 //    }
 //
+
 }
