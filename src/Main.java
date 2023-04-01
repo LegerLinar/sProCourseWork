@@ -3,9 +3,9 @@ import pro.sky.java.course1.course.Employee;
 public class Main {
     public static void main(String[] args) {
         Employee[] employees = new Employee[10];
-        employees[0] = new Employee("Кисложопкин", "Аркадий", "Васильевич", 1, 35000);
-        employees[2] = new Employee("Селиванов", "Акакий", "Александрович", 4, 32000);
-        employees[4] = new Employee("Кулиджи", "Казимир", "Космосович", 3, 42000);
+        employees[0] = new Employee("Кисложопкин", "Аркадий", "Васильевич", "1", 35000);
+        employees[2] = new Employee("Селиванов", "Акакий", "Александрович", "4", 32000);
+        employees[4] = new Employee("Кулиджи", "Казимир", "Космосович", "3", 42000);
 
         findEmployeeMaxSalary(employees);
         findEmployeeMinSalary(employees);
@@ -16,10 +16,13 @@ public class Main {
 
         //     ------------------------------------- NEXT LEVEL CALLS AND DATA -------------------------------------
 
-        employees[6] = new Employee("Франклин", "Бенджамин", "Батькович", 5, 100_000);
+        employees[1] = new Employee("Франклин", "Бенджамин", "Батькович", "5", 200_000);
+        employees[3] = new Employee("Джугашвили", "Иосиф", "Виссарионович", "5", 1_000);
+        employees[5] = new Employee("Хирохито", "Сёма", "Ёсихитович", "4", 100_000);
 
         toIndexSalary(employees, 11);
         showEmployeesData(employees);
+        findEmployeeWithMinSalaryOfDepartment(employees, "5");
 
     }
 //     ------------------------------------- DEFAULT METHODS AND DATA -------------------------------------
@@ -36,7 +39,7 @@ public class Main {
         }
     }
 
-    public static int countMonthSalaryExpenses(Employee[] employeesList){
+    public static int countMonthSalaryExpenses(Employee[] employeesList) {
         int monthSalaryExpenses = 0;
         for (int i = 0; i < employeesList.length; i++) {
             if (employeesList[i] != null) {
@@ -44,17 +47,16 @@ public class Main {
             }
         }
         return monthSalaryExpenses;
-        }
+    }
 
-    public static String findEmployeeMinSalary(Employee[] employeesList){
+    public static String findEmployeeMinSalary(Employee[] employeesList) {
         int minSalary = 0;
         String employeeWithMinSalary = "";
         for (int i = 0; i < employeesList.length; i++) {
-            if(employeesList[i] != null && employeesList[i].getSalary() < minSalary || minSalary == 0 && employeesList[i] != null){
+            if (employeesList[i] != null && employeesList[i].getSalary() < minSalary || minSalary == 0 && employeesList[i] != null) {
                 minSalary = employeesList[i].getSalary();
                 employeeWithMinSalary = employeesList[i].toString();
-            }
-            else{
+            } else {
 
             }
         }
@@ -62,7 +64,7 @@ public class Main {
 
     }
 
-    public static String findEmployeeMaxSalary(Employee[] employeesList){
+    public static String findEmployeeMaxSalary(Employee[] employeesList) {
         int maxSalary = 0;
         String employeeWithMaxSalary = "";
         for (int i = 0; i < employeesList.length; i++) {
@@ -91,14 +93,14 @@ public class Main {
         for (int i = 0; i < employees.length; i++) {
 
             if (employees[i] != null) {
-                employeesList += employees[i].getSurname() + " " + employees[i].getName() + " " + employees[i].getPatronymic() + "\n";
+                employeesList += employees[i].getEmployeeInitials() + "\n";
             }
         }
         System.out.println(employeesList);
     }
 
-// ------------------------------------- NEXT LEVEL METHODS   -------------------------------------
 
+    // ------------------------------------- NEXT LEVEL METHODS   -------------------------------------
     public static void toIndexSalary(Employee[] employees, int percent) {
         int increaseAmount = 0;
         for (int i = 0; i < employees.length; i++) {
@@ -110,7 +112,25 @@ public class Main {
         }
     }
 
-//    -------------------------------------    class end -------------------------------------
+    public static String findEmployeeWithMinSalaryOfDepartment(Employee[] employees, String department) {
+        int minSalary = 0;
+        String employeeName = "";
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getDepartment().equals(department)) {
+                if (employees[i].getSalary() < minSalary || minSalary == 0) {
+                    minSalary = employees[i].getSalary();
+                    employeeName = employees[i].toString();
+                }
+            }
+        }
+        if (employeeName.equals("")) {
+            return "В этом отделе нет сотрудников";
+        } else {
+            return "Сотрудник " + employeeName + " получает наименьшую зарплату в отделе " + department;
+        }
+    }
 }
+//    -------------------------------------    class end -------------------------------------
+
 
 

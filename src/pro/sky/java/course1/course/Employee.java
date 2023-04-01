@@ -17,16 +17,22 @@ public class Employee {
 //    public Employee(String surname, String name, String patronymic, String department, int salary, int id) {
 
 
-    public Employee(String surname, String name, String patronymic, int department, int salary) {
-        if (department > departments.length || department < 0) {
-            throw new IllegalArgumentException("Такого отдела не существует");
-        }
+    public Employee(String surname, String name, String patronymic, String department, int salary) {
+
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
-        this.department = departments[department - 1];
+        for (String departmentName : departments) {
+            if (departmentName.equals(department)) {
+                this.department = department;
+            }
+        }
         this.salary = salary;
         id = idCounter++;
+    }
+
+    public String getEmployeeInitials() {
+        return surname + " " + name + " " + patronymic;
     }
 
     public String getSurname() {
@@ -67,16 +73,17 @@ public class Employee {
         this.salary = salary;
     }
 
-    public void setDepartment(int department) {
-        if (department > departments.length || department < 0) {
-            throw new IllegalArgumentException("Такого отдела не существует");
+    public void setDepartment(String department) {
+        for (String departmentName : departments) {
+            if (departmentName.equals(department)) {
+                this.department = department;
+            }
         }
-        this.department = departments[department - 1];
     }
 
     @Override
     public String toString() {
-        return "Сотрудник - " + name + " " + surname + " " + patronymic + ". Отдел - " + department + ". Зарплата в мес. - " + salary + "(id: " + id + ")";
+        return "Сотрудник - " + surname + " " + name + " " + patronymic + ". Отдел - " + department + ". Зарплата в мес. - " + salary + "(id: " + id + ")";
     }
 
 //    ------------------------------------- class end -------------------------------------
