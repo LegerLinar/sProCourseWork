@@ -110,21 +110,21 @@ public class Main {
         }
     }
 
-    public static String findEmployeeWithMinSalaryOfDepartment(Employee[] employees, String department) {
+    public static void findEmployeeWithMinSalaryOfDepartment(Employee[] employees, String department) {
         int minSalary = 0;
         String employeeName = "";
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartment().equals(department)) {
                 if (employee.getSalary() < minSalary || minSalary == 0) {
                     minSalary = employee.getSalary();
-                    employeeName = employee.toString();
+                    employeeName = employee.getEmployeeInitials();
                 }
             }
         }
         if (employeeName.equals("")) {
-            return "В этом отделе нет сотрудников";
+            System.out.println("В указанном отделе нет сотрудников");
         } else {
-            return "Сотрудник " + employeeName + " получает наименьшую зарплату в отделе " + department;
+            System.out.println("Сотрудник " + employeeName + " получает наименьшую зарплату в отделе " + department);
         }
     }
 }
