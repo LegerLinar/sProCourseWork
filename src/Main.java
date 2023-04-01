@@ -4,9 +4,12 @@ public class Main {
     public static void main(String[] args) {
         Employee[] employees = new Employee[10];
         employees[0] = new Employee("Кисложопкин", "Аркадий", "Васильевич", 1, 35000);
-        employees[2] = new Employee("Селиванов", "Акакий", "Александрович", 1, 32000);
-        employees[4] = new Employee("Кулиджи", "Казимир", "Космосович", 1, 42000);
+        employees[2] = new Employee("Селиванов", "Акакий", "Александрович", 4, 32000);
+        employees[4] = new Employee("Кулиджи", "Казимир", "Космосович", 3, 42000);
+        employees[3] = new Employee("Кулиджи", "Казимир", "Космосович", 5, 42000);
 
+        findEmployeeMaxSalary(employees);
+        findEmployeeMinSalary(employees);
         showEmployeesData(employees);
         System.out.println(countMonthSalaryExpenses(employees));
         System.out.println(countAverageMonthSalary(employees));
