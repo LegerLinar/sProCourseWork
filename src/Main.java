@@ -6,7 +6,6 @@ public class Main {
         employees[0] = new Employee("Кисложопкин", "Аркадий", "Васильевич", 1, 35000);
         employees[2] = new Employee("Селиванов", "Акакий", "Александрович", 4, 32000);
         employees[4] = new Employee("Кулиджи", "Казимир", "Космосович", 3, 42000);
-        employees[3] = new Employee("Кулиджи", "Казимир", "Космосович", 5, 42000);
 
         findEmployeeMaxSalary(employees);
         findEmployeeMinSalary(employees);
@@ -14,7 +13,17 @@ public class Main {
         System.out.println(countMonthSalaryExpenses(employees));
         System.out.println(countAverageMonthSalary(employees));
         showEmployeesNames(employees);
+
+        //     ------------------------------------- NEXT LEVEL CALLS AND DATA -------------------------------------
+
+        employees[6] = new Employee("Франклин", "Бенджамин", "Батькович", 5, 100_000);
+
+        toIndexSalary(employees, 11);
+        showEmployeesData(employees);
+
     }
+//     ------------------------------------- DEFAULT METHODS AND DATA -------------------------------------
+
 
     public static void showEmployeesData(Employee[] employeesList) {
         System.out.println("Личный состав:");
@@ -26,7 +35,6 @@ public class Main {
             }
         }
     }
-
 
     public static int countMonthSalaryExpenses(Employee[] employeesList){
         int monthSalaryExpenses = 0;
@@ -87,6 +95,19 @@ public class Main {
             }
         }
         System.out.println(employeesList);
+    }
+
+// ------------------------------------- NEXT LEVEL METHODS   -------------------------------------
+
+    public static void toIndexSalary(Employee[] employees, int percent) {
+        int increaseAmount = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                increaseAmount = employees[i].getSalary() * percent / 100;
+                employees[i].setSalary(employees[i].getSalary() + increaseAmount);
+
+            }
+        }
     }
 
 //    -------------------------------------    class end -------------------------------------
