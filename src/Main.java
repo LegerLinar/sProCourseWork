@@ -22,7 +22,7 @@ public class Main {
 
         toIndexSalary(employees, 11);
         showEmployeesData(employees);
-        findEmployeeWithMinSalaryOfDepartment(employees, "5");
+        findEmployeeWithMinSalaryOfDepartment(employees, "3");
 
     }
 //     ------------------------------------- DEFAULT METHODS AND DATA -------------------------------------
@@ -124,7 +124,7 @@ public class Main {
         if (employeeName.equals("")) {
             System.out.println("В указанном отделе нет сотрудников");
         } else {
-            System.out.println("Сотрудник " + employeeName + " получает наименьшую зарплату в отделе " + department);
+            System.out.println("Сотрудник " + employeeName + " получает наименьшую зарплату в отделе " + department + " - " + minSalary + "руб.");
         }
     }
 }
