@@ -7,8 +7,8 @@ public class Main {
         employees[2] = new Employee("Селиванов", "Акакий", "Александрович", "4", 32000);
         employees[4] = new Employee("Кулиджи", "Казимир", "Космосович", "3", 42000);
 
-        findEmployeeMaxSalary(employees);
-        findEmployeeMinSalary(employees);
+        System.out.println(findEmployeeMaxSalary(employees));
+        System.out.println(findEmployeeMinSalary(employees));
         showEmployeesData(employees);
         System.out.println(countMonthSalaryExpenses(employees));
         System.out.println(countAverageMonthSalary(employees));
@@ -30,9 +30,9 @@ public class Main {
 
     public static void showEmployeesData(Employee[] employeesList) {
         System.out.println("Личный состав:");
-        for (int i = 0; i < employeesList.length; i++) {
-            if (employeesList[i] != null) {
-                System.out.println(employeesList[i].toString());
+        for (Employee employee : employeesList) {
+            if (employee != null) {
+                System.out.println(employee);
             } else {
                 System.out.println("Вакантное место");
             }
@@ -41,9 +41,9 @@ public class Main {
 
     public static int countMonthSalaryExpenses(Employee[] employeesList) {
         int monthSalaryExpenses = 0;
-        for (int i = 0; i < employeesList.length; i++) {
-            if (employeesList[i] != null) {
-                monthSalaryExpenses += employeesList[i].getSalary();
+        for (Employee employee : employeesList) {
+            if (employee != null) {
+                monthSalaryExpenses += employee.getSalary();
             }
         }
         return monthSalaryExpenses;
@@ -52,12 +52,10 @@ public class Main {
     public static String findEmployeeMinSalary(Employee[] employeesList) {
         int minSalary = 0;
         String employeeWithMinSalary = "";
-        for (int i = 0; i < employeesList.length; i++) {
-            if (employeesList[i] != null && employeesList[i].getSalary() < minSalary || minSalary == 0 && employeesList[i] != null) {
-                minSalary = employeesList[i].getSalary();
-                employeeWithMinSalary = employeesList[i].toString();
-            } else {
-
+        for (Employee employee : employeesList) {
+            if (employee != null && employee.getSalary() < minSalary || minSalary == 0 && employee != null) {
+                minSalary = employee.getSalary();
+                employeeWithMinSalary = employee.toString();
             }
         }
         return employeeWithMinSalary;
@@ -67,10 +65,10 @@ public class Main {
     public static String findEmployeeMaxSalary(Employee[] employeesList) {
         int maxSalary = 0;
         String employeeWithMaxSalary = "";
-        for (int i = 0; i < employeesList.length; i++) {
-            if (employeesList[i] != null && employeesList[i].getSalary() > maxSalary) {
-                maxSalary = employeesList[i].getSalary();
-                employeeWithMaxSalary = employeesList[i].toString();
+        for (Employee employee : employeesList) {
+            if (employee != null && employee.getSalary() > maxSalary) {
+                maxSalary = employee.getSalary();
+                employeeWithMaxSalary = employee.toString();
             }
         }
         return employeeWithMaxSalary;
@@ -79,9 +77,9 @@ public class Main {
     public static int countAverageMonthSalary(Employee[] employeesList) {
         int totalMonthSalary = 0;
         int employeesCounter = 0;
-        for (int i = 0; i < employeesList.length; i++) {
-            if (employeesList[i] != null) {
-                totalMonthSalary += employeesList[i].getSalary();
+        for (Employee employee : employeesList) {
+            if (employee != null) {
+                totalMonthSalary += employee.getSalary();
                 employeesCounter++;
             }
         }
@@ -89,11 +87,11 @@ public class Main {
     }
 
     public static void showEmployeesNames(Employee[] employees) {
-        String employeesList = "";
-        for (int i = 0; i < employees.length; i++) {
+        StringBuilder employeesList = new StringBuilder();
+        for (Employee employee : employees) {
 
-            if (employees[i] != null) {
-                employeesList += employees[i].getEmployeeInitials() + "\n";
+            if (employee != null) {
+                employeesList.append(employee.getEmployeeInitials()).append("\n");
             }
         }
         System.out.println(employeesList);
@@ -102,11 +100,11 @@ public class Main {
 
     // ------------------------------------- NEXT LEVEL METHODS   -------------------------------------
     public static void toIndexSalary(Employee[] employees, int percent) {
-        int increaseAmount = 0;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null) {
-                increaseAmount = employees[i].getSalary() * percent / 100;
-                employees[i].setSalary(employees[i].getSalary() + increaseAmount);
+        int increaseAmount;
+        for (Employee employee : employees) {
+            if (employee != null) {
+                increaseAmount = employee.getSalary() * percent / 100;
+                employee.setSalary(employee.getSalary() + increaseAmount);
 
             }
         }
@@ -115,11 +113,11 @@ public class Main {
     public static String findEmployeeWithMinSalaryOfDepartment(Employee[] employees, String department) {
         int minSalary = 0;
         String employeeName = "";
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getDepartment().equals(department)) {
-                if (employees[i].getSalary() < minSalary || minSalary == 0) {
-                    minSalary = employees[i].getSalary();
-                    employeeName = employees[i].toString();
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment().equals(department)) {
+                if (employee.getSalary() < minSalary || minSalary == 0) {
+                    minSalary = employee.getSalary();
+                    employeeName = employee.toString();
                 }
             }
         }
