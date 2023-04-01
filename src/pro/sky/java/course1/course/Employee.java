@@ -76,7 +76,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Сотрудник - " + name + " " + surname + " " + patronymic + ". Отдел - " + department + ". Зарплата в мес. - " + salary;
+        return "Сотрудник - " + name + " " + surname + " " + patronymic + ". Отдел - " + department + ". Зарплата в мес. - " + salary + "(id: " + id + ")";
     }
 
 //    ------------------------------------- class end -------------------------------------
