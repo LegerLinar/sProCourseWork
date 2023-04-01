@@ -74,8 +74,12 @@ public class Employee {
         this.department = departments[department - 1];
     }
 
+    @Override
+    public String toString() {
+        return "Сотрудник - " + name + " " + surname + " " + patronymic + ". Отдел - " + department + ". Зарплата в мес. - " + salary;
+    }
 
-// ------------------ Закомментил геттер для idCounter
+    // ------------------ Закомментил геттер для idCounter
 //    public static int getIdCounter() {
 //        return idCounter;
 //    }
