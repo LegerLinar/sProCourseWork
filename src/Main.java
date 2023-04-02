@@ -24,7 +24,8 @@ public class Main {
 //        showEmployeesData(employees);
 //        findEmployeeWithMinSalaryOfDepartment(employees, "5");
 //        findEmployeeWithMaxSalaryOfDepartment(employees, "5");
-        countSummarySalaryForDepartment(employees, "5");
+        countSummarySalaryForDepartment(employees, "6");
+        countAverageSalaryForDepartment(employees, "1");
     }
 //     ------------------------------------- DEFAULT METHODS AND DATA -------------------------------------
 
@@ -100,6 +101,36 @@ public class Main {
 
 
     // ------------------------------------- NEXT LEVEL METHODS   -------------------------------------
+
+    public static void isDepartment(Employee[] employees, String department) {
+        if (!employees[0].getDepartments().contains(department)) {
+            throw new RuntimeException("Такого отдела не существует");
+        }
+    }
+
+    public static Employee[] createSubEmployeeListByDep(Employee[] employees, String department) {
+//        вернет субмассив Employee[] сортированный по department.
+        int subEmployeesCounter = 0;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment().equals(department)) {
+                subEmployeesCounter++;
+            }
+        }
+
+        Employee[] subEmployeesList = new Employee[subEmployeesCounter];
+
+        int subEmployeesIndexCounter = 0;
+
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment().equals(department)) {
+                subEmployeesList[subEmployeesIndexCounter] = employee;
+                subEmployeesIndexCounter++;
+            }
+        }
+        return subEmployeesList;
+    }
+
+
     public static void toIndexSalary(Employee[] employees, int percent) {
         int increaseAmount;
         for (Employee employee : employees) {
@@ -163,15 +194,45 @@ public class Main {
             return;
         }
         int summarySalary = 0;
+        for (Employee employee : createSubEmployeeListByDep(employees, department)) {
+
+            summarySalary += employee.getSalary();
+        }
+        System.out.println("Сумма затрат на заработную плату отделу " + department + " в месяц, составляет - " + summarySalary + "руб.");
+    }
+
+
+    public static void countAverageSalaryForDepartment(Employee[] employees, String department) {
+        isDepartment(employees, department);
+        int summarySalary = 0;
+        int employeesCounter = 0;
+        int averageSummarySalary = 0;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartment().equals(department)) {
                 summarySalary += employee.getSalary();
+                employeesCounter++;
             }
         }
-        System.out.println("сумма затрат на заработную плату отделу " + department + " составляет - " + summarySalary + "руб.");
+        averageSummarySalary = summarySalary / employeesCounter;
+        System.out.println("Средняя заработная плата за месяц в отделе " + department + " составляет - " + averageSummarySalary + "руб.");
     }
+
+
 //    -------------------------------------    class end -------------------------------------
 }
+//    -------------------------------------    refactor for code duplicates templates -------------------------------------
+
+//    public static boolean isDepartment(Employee[] employees, String department) {
+//        if (employees[0].getDepartments().contains(department)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
 
+// шаблон для создания под-массива с сотрудниками отдела
+//public static boolean isDepartmentEqual(Employee[] employees, String department) {
+//    employee.getDepartment().equals(department)
+//}
 
