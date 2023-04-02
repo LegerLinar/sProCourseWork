@@ -275,5 +275,23 @@ public class EmployeeBook {
             throw new RuntimeException("Свободных вакансий нет. Чтобы нанять кого-то нужного, нужно сначала уволить кого-нибудь ненужного");
         }
     }
+
+    public void dismissEmployeeByFullName(String surname, String name, String patronymic) {
+        int targetToDismissPlace = 0;
+        boolean isVictimFound = false;
+        for (Employee employee : employees) {
+            if (employee.getEmployeeInitials().contentEquals(surname + " " + name + " " + patronymic)) {
+                isVictimFound = true;
+                break;
+            }
+            targetToDismissPlace++;
+        }
+        if (isVictimFound) {
+            employees[targetToDismissPlace] = null;
+            System.out.println("Сотрудник уволен");
+        } else {
+            throw new IllegalArgumentException("Сотрудник с такими ФИО не найден, попробуйте поиск по id");
+        }
+    }
 //    –––––––––––––––––––––––– Class End ––––––––––––––––––––––––
 }
