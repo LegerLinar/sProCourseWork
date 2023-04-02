@@ -22,10 +22,14 @@ public class Main {
 
 //        toIndexSalary(employees, 11);
 //        showEmployeesData(employees);
-//        findEmployeeWithMinSalaryOfDepartment(employees, "5");
-//        findEmployeeWithMaxSalaryOfDepartment(employees, "5");
-        countSummarySalaryForDepartment(employees, "6");
-        countAverageSalaryForDepartment(employees, "1");
+//        findEmployeesMinSalaryByDep(employees, "5");
+//        findEmployeesMaxSalaryOfDep(employees, "5");
+//        countSummarySalaryOfDep(employees, "5");
+//        countAverageSalaryOfDep(employees, "1");
+        showEmployeesData(employees);
+        toIndexSalaryOfDep(employees, "5", 100);
+        showEmployeesData(employees);
+
     }
 //     ------------------------------------- DEFAULT METHODS AND DATA -------------------------------------
 
@@ -107,8 +111,9 @@ public class Main {
             throw new RuntimeException("Такого отдела не существует");
         }
     }
+    //проверка на существование отдела
 
-    public static Employee[] createSubEmployeeListByDep(Employee[] employees, String department) {
+    public static Employee[] getEmployeesByDep(Employee[] employees, String department) {
 //        вернет субмассив Employee[] сортированный по department.
         int subEmployeesCounter = 0;
         for (Employee employee : employees) {
@@ -129,7 +134,7 @@ public class Main {
         }
         return subEmployeesList;
     }
-
+//    создание субмассива отдела для поиска свойств экземпляра Employee в нем
 
     public static void toIndexSalary(Employee[] employees, int percent) {
         int increaseAmount;
@@ -142,19 +147,14 @@ public class Main {
         }
     }
 
-    public static void findEmployeeWithMinSalaryOfDepartment(Employee[] employees, String department) {
-        if (!employees[0].getDepartments().contains(department)) {
-            System.out.println("Такого отдела не существует");
-            return;
-        }
+    public static void findEmployeesMinSalaryByDep(Employee[] employees, String department) {
+        isDepartment(employees, department);
         int minSalary = 0;
         String employeeName = "";
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment().equals(department)) {
-                if (employee.getSalary() < minSalary || minSalary == 0) {
-                    minSalary = employee.getSalary();
-                    employeeName = employee.getEmployeeInitials();
-                }
+        for (Employee employee : getEmployeesByDep(employees, department)) {
+            if (employee.getSalary() < minSalary || minSalary == 0) {
+                minSalary = employee.getSalary();
+                employeeName = employee.getEmployeeInitials();
             }
         }
         if (employeeName.equals("")) {
@@ -164,19 +164,14 @@ public class Main {
         }
     }
 
-    public static void findEmployeeWithMaxSalaryOfDepartment(Employee[] employees, String department) {
-        if (!employees[0].getDepartments().contains(department)) {
-            System.out.println("Такого отдела не существует");
-            return;
-        }
+    public static void findEmployeesMaxSalaryOfDep(Employee[] employees, String department) {
+        isDepartment(employees, department);
         int maxSalary = 0;
         String employeeName = "";
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment().equals(department)) {
-                if (employee.getSalary() > maxSalary || maxSalary == 0) {
-                    maxSalary = employee.getSalary();
-                    employeeName = employee.getEmployeeInitials();
-                }
+        for (Employee employee : getEmployeesByDep(employees, department)) {
+            if (employee.getSalary() > maxSalary || maxSalary == 0) {
+                maxSalary = employee.getSalary();
+                employeeName = employee.getEmployeeInitials();
             }
         }
         if (employeeName.equals("")) {
@@ -188,13 +183,10 @@ public class Main {
 
     }
 
-    public static void countSummarySalaryForDepartment(Employee[] employees, String department) {
-        if (!employees[0].getDepartments().contains(department)) {
-            System.out.println("Такого отдела не существует");
-            return;
-        }
+    public static void countSummarySalaryOfDep(Employee[] employees, String department) {
+        isDepartment(employees, department);
         int summarySalary = 0;
-        for (Employee employee : createSubEmployeeListByDep(employees, department)) {
+        for (Employee employee : getEmployeesByDep(employees, department)) {
 
             summarySalary += employee.getSalary();
         }
@@ -202,21 +194,21 @@ public class Main {
     }
 
 
-    public static void countAverageSalaryForDepartment(Employee[] employees, String department) {
+    public static void countAverageSalaryOfDep(Employee[] employees, String department) {
         isDepartment(employees, department);
         int summarySalary = 0;
         int employeesCounter = 0;
-        int averageSummarySalary = 0;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment().equals(department)) {
-                summarySalary += employee.getSalary();
-                employeesCounter++;
-            }
+        for (Employee employee : getEmployeesByDep(employees, department)) {
+            summarySalary += employee.getSalary();
+            employeesCounter++;
         }
-        averageSummarySalary = summarySalary / employeesCounter;
+        int averageSummarySalary = summarySalary / employeesCounter;
         System.out.println("Средняя заработная плата за месяц в отделе " + department + " составляет - " + averageSummarySalary + "руб.");
     }
 
+    public static void toIndexSalaryOfDep(Employee[] employees, String department, int percent) {
+        toIndexSalary(getEmployeesByDep(employees, department), percent);
+    }
 
 //    -------------------------------------    class end -------------------------------------
 }

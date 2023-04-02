@@ -31,10 +31,19 @@ public class Employee {
         id = idCounter++;
     }
 
+    // ------------------ own utily methods ---------------------
     public String getEmployeeInitials() {
         return surname + " " + name + " " + patronymic;
     }
 
+//    public void isDepartment(String department) {
+//        if (departments.toString().contains(department)) {
+//            throw new RuntimeException("Такого отдела не существует");
+//        }
+//    }
+
+
+    //   ---------------------- setters-getters area -----------------------
     public String getSurname() {
         return surname;
     }
