@@ -32,6 +32,7 @@ public class Main {
 
         printDepartment(employees, "5");
         printWhoEarnLess(employees, 50000);
+        printWhoEarnMore(employees, 70_000);
 
 
     }
@@ -226,6 +227,7 @@ public class Main {
     }
 
     public static void printWhoEarnLess(Employee[] employees, int salary) {
+        System.out.println("Сотрудники зарабатывающие менее " + salary + " руб.");
         int existCounter = 0;
         for (Employee employee : employees) {
             if (employee != null && employee.getSalary() < salary) {
@@ -235,6 +237,20 @@ public class Main {
         }
         if (existCounter == 0) {
             System.out.println("Сотрудников с зарплатой ниже " + salary + "руб. нет");
+        }
+    }
+
+    public static void printWhoEarnMore(Employee[] employees, int salary) {
+        System.out.println("Сотрудники зарабатывающие более " + salary + " руб.");
+        int existCounter = 0;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getSalary() >= salary) {
+                existCounter = employee.getSalary();
+                System.out.println(employee);
+            }
+        }
+        if (existCounter == 0) {
+            System.out.println("Сотрудников с зарплатой выше или равной " + salary + "руб. нет");
         }
     }
 
