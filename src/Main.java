@@ -6,7 +6,7 @@ public class Main {
         EmployeeBook employeeBook = new EmployeeBook();
 //        System.out.println(employeeBook.findEmployeeMaxSalary());
 //        System.out.println(employeeBook.findEmployeeMinSalary());
-//        employeeBook.showEmployeesData();
+//        employeeBook.printEmployeesData();
 //        System.out.println(employeeBook.countMonthSalaryExpenses());
 //        System.out.println(employeeBook.countAverageMonthSalary());
 //        employeeBook.showEmployeesNames();
@@ -15,25 +15,36 @@ public class Main {
 
 
 //        employeeBook.toIndexSalary(25);
-//        employeeBook.showEmployeesData();
+//        employeeBook.printEmployeesData();
 //        employeeBook.findEmployeesMinSalaryByDep("5");
 //        employeeBook.findEmployeesMaxSalaryOfDep("5");
 //        employeeBook.countSummarySalaryOfDep("5");
 //        employeeBook.countAverageSalaryOfDep("1");
-//        employeeBook.showEmployeesData();
+//        employeeBook.printEmployeesData();
 //        employeeBook.toIndexSalaryOfDep("5", 100);
-//        employeeBook.showEmployeesData();
+//        employeeBook.printEmployeesData();
 //
 //        employeeBook.printDepartment("1");
 //        employeeBook.printWhoEarnLess(50000);
 //        employeeBook.printWhoEarnMore(70_000);
 
+        //     ------------------------------------- NEXT LEVEL CALLS AND DATA -------------------------------------
+
+        employeeBook.printEmployeesData();
+        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
+        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
+        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
+        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
+//        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000); ------- а вот это уже перебор
+        employeeBook.printEmployeesData();
+
 
     }
+
 //     ------------------------------------- DEFAULT METHODS AND DATA -------------------------------------
 
 
-//    public static void showEmployeesData(Employee[] employeesList) {
+//    public static void printEmployeesData(Employee[] employeesList) {
 //        System.out.println("Личный состав:");
 //        for (Employee employee : employeesList) {
 //            if (employee != null) {

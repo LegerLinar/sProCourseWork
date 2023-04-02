@@ -23,7 +23,7 @@ public class EmployeeBook {
         this.employees = employees;
     }
 
-    public void showEmployeesData() {
+    public void printEmployeesData() {
         System.out.println("Личный состав:");
         for (Employee employee : employees) {
             if (employee != null) {
@@ -253,6 +253,26 @@ public class EmployeeBook {
         }
         if (existCounter == 0) {
             System.out.println("Сотрудников с зарплатой выше или равной " + salary + "руб. нет");
+        }
+    }
+
+//    –––––––––––––––––––– Last Level –––––––––––––––––––––––
+
+    public void addNewEmployee(String surname, String name, String patronymic, String department, int salary) {
+        int voidSpotNumber = 0;
+        boolean isVacancy = false;
+        for (Employee employee : employees) {
+            if (employee == null) {
+                isVacancy = true;
+                break;
+            }
+            voidSpotNumber++;
+        }
+        if (isVacancy) {
+            employees[voidSpotNumber] = new Employee(surname, name, patronymic, department, salary);
+            System.out.println("Сотрудник добавлен");
+        } else {
+            throw new RuntimeException("Свободных вакансий нет. Чтобы нанять кого-то нужного, нужно сначала уволить кого-нибудь ненужного");
         }
     }
 //    –––––––––––––––––––––––– Class End ––––––––––––––––––––––––
