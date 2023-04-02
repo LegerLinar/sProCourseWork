@@ -1,7 +1,5 @@
 package pro.sky.java.course1.course;
 
-import java.util.Arrays;
-
 public class Employee {
     private String surname;
     private String name;
@@ -22,16 +20,33 @@ public class Employee {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
-        for (String departmentName : departments) {
-            if (departmentName.equals(department)) {
-                this.department = department;
-            }
+        if (isDepartmentExist(department)) {
+            this.department = department;
+        } else {
+            throw new IllegalArgumentException("Такого отдела не существует");
         }
         this.salary = salary;
         id = idCounter++;
     }
 
     // ------------------ own utily methods ---------------------
+
+    public boolean isDepartmentExist(String department) {
+        String departmentNameHolder = "";
+
+        for (String departmentName : departments) {
+            if (departmentName.contentEquals(department)) {
+                departmentNameHolder = department;
+                break;
+            }
+        }
+        if (departmentNameHolder.equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public String getEmployeeInitials() {
         return surname + " " + name + " " + patronymic;
     }
@@ -72,8 +87,8 @@ public class Employee {
         return id;
     }
 
-    public String getDepartments() {
-        return Arrays.toString(departments);
+    public String[] getDepartments() {
+        return departments;
     }
 
 //    Setters
@@ -94,6 +109,7 @@ public class Employee {
     public String toString() {
         return "Сотрудник - " + surname + " " + name + " " + patronymic + ". Отдел - " + department + ". Зарплата в мес. - " + salary + "(id: " + id + ")";
     }
+
 
 //    ------------------------------------- class end -------------------------------------
     // ------------------ Закомментил геттер для idCounter
