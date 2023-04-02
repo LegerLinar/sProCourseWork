@@ -23,7 +23,7 @@ public class EmployeeBook {
         this.employees = employees;
     }
 
-    public void printEmployeesData() {
+    public void printAllEmployeesData() {
         System.out.println("Личный состав:");
         for (Employee employee : employees) {
             if (employee != null) {
@@ -376,6 +376,43 @@ public class EmployeeBook {
             System.out.println("Сотрудник " + employees[foundEmployeeIndex].getEmployeeInitials() + " переведен в отдел " + employees[foundEmployeeIndex].getDepartment());
         } else {
             System.out.println("Сотрудник не найден");
+        }
+    }
+
+    public String[] printActualDepartments() {
+        int departmentsAmount = 0;
+        for (Employee employee : employees) {
+            if (employee != null) {
+                departmentsAmount = employee.getDepartments().length;
+                break;
+            }
+        }
+        String[] actualDepartments = new String[departmentsAmount];
+        for (Employee employee : employees) {
+            if (employee != null) {
+                for (int i = 0; i < employee.getDepartments().length; i++) {
+                    actualDepartments[i] = employee.getDepartments()[i];
+                }
+
+                break;
+            }
+        }
+
+        return actualDepartments;
+    }
+
+    public void printAllDepartmentPersonnel() {
+
+        for (String actualDepartment : printActualDepartments()) {
+            System.out.println("Отдел " + actualDepartment + ":");
+            for (Employee employee : getEmployeesByDep(actualDepartment)) {
+                if (employee == null) {
+                    System.out.println("В отделе нет сотрудников");
+                }
+
+                System.out.println(employee.getEmployeeInitials() + ", id: " + employee.getId());
+
+            }
         }
     }
 

@@ -14,7 +14,6 @@ public class Employee {
 
     private final String[] departments = {"1", "2", "3", "4", "5"};
 
-//    public Employee(String surname, String name, String patronymic, String department, int salary, int id) {
 
 
     public Employee(String surname, String name, String patronymic, String department, int salary) {
@@ -52,12 +51,6 @@ public class Employee {
     public String getEmployeeInitials() {
         return surname + " " + name + " " + patronymic;
     }
-
-//    public void isDepartment(String department) {
-//        if (departments.toString().contains(department)) {
-//            throw new RuntimeException("Такого отдела не существует");
-//        }
-//    }
 
 
     //   ---------------------- setters-getters area -----------------------
@@ -126,10 +119,5 @@ public class Employee {
         return Objects.hash(id);
     }
 //    ------------------------------------- class end -------------------------------------
-    // ------------------ Закомментил геттер для idCounter
-//    public static int getIdCounter() {
-//        return idCounter;
-//    }
-//
 
 }
