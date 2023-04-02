@@ -277,10 +277,11 @@ public class EmployeeBook {
     }
 
     public void dismissEmployeeByFullName(String surname, String name, String patronymic) {
+        String searchedPerson = surname + " " + name + " " + patronymic;
         int targetToDismissPlace = 0;
         boolean isVictimFound = false;
         for (Employee employee : employees) {
-            if (employee.getEmployeeInitials().contentEquals(surname + " " + name + " " + patronymic)) {
+            if (employee != null && employee.getEmployeeInitials().contentEquals(searchedPerson)) {
                 isVictimFound = true;
                 break;
             }
@@ -291,6 +292,58 @@ public class EmployeeBook {
             System.out.println("Сотрудник уволен");
         } else {
             throw new IllegalArgumentException("Сотрудник с такими ФИО не найден, попробуйте поиск по id");
+        }
+    }
+
+    public void dismissEmployeeById(int id) {
+        int targetToDismissPlace = 0;
+        boolean isVictimFound = false;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getId() == id) {
+                isVictimFound = true;
+                break;
+            }
+            targetToDismissPlace++;
+        }
+        if (isVictimFound) {
+            employees[targetToDismissPlace] = null;
+            System.out.println("Сотрудник уволен");
+        } else {
+            throw new IllegalArgumentException("Сотрудник с таким id не найден, попробуйте поиск по ФИО");
+        }
+    }
+
+    //    boolean searchEmployee(String surname, String name, String patronymic, int id) {
+//        String searchedPerson = surname + " " + name + " " + patronymic;
+//        boolean employeeFound = false;
+//        for (Employee employee : employees) {
+//            if (employee != null && employee.getEmployeeInitials().contentEquals(searchedPerson) || employee != null && employee.getId() == id) {
+//                employeeFound = true;
+//                break;
+//            }
+//        }
+//        return employeeFound;
+//    }
+    public void changeEmployeesSalary(String surname, String name, String patronymic, int changeSalary) {
+        String searchedPerson = surname + " " + name + " " + patronymic;
+        boolean employeeFound = false;
+        String employeeFoundName = "";
+        int employeeFoundId = 0;
+
+        for (Employee employee : employees) {
+            if (employee != null && employee.getEmployeeInitials().contentEquals(searchedPerson)) {
+                employee.setSalary(employee.getSalary() + changeSalary);
+                employeeFound = true;
+                employeeFoundName = employee.getEmployeeInitials();
+                employeeFoundId = employee.getId();
+                break;
+            }
+        }
+
+        if (employeeFound) {
+            System.out.println("Зарплата сотрудника " + employeeFoundName + " ( id " + employeeFoundId + ") изменена");
+        } else {
+            System.out.println("Сотрудник не найден");
         }
     }
 //    –––––––––––––––––––––––– Class End ––––––––––––––––––––––––
