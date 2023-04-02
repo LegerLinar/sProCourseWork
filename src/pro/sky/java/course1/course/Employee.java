@@ -1,5 +1,7 @@
 package pro.sky.java.course1.course;
 
+import java.util.Objects;
+
 public class Employee {
     private String surname;
     private String name;
@@ -108,10 +110,21 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Сотрудник - " + surname + " " + name + " " + patronymic + ". Отдел - " + department + ". Зарплата в мес. - " + salary + "(id: " + id + ")";
+        return "Сотрудник - " + surname + " " + name + " " + patronymic + ". Отдел - " + department + ". Зарплата в мес. - " + salary + "руб. (id: " + id + ")";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id && surname.equals(employee.surname) && name.equals(employee.name) && patronymic.equals(employee.patronymic);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 //    ------------------------------------- class end -------------------------------------
     // ------------------ Закомментил геттер для idCounter
 //    public static int getIdCounter() {

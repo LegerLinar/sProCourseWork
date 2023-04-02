@@ -30,17 +30,19 @@ public class Main {
 
         //     ------------------------------------- NEXT LEVEL CALLS AND DATA -------------------------------------
 
-        employeeBook.printEmployeesData();
-        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
-//        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
-//        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
-//        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
-        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
 //        employeeBook.printEmployeesData();
+        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
+//        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
+//        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
+//        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
+        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
+        employeeBook.printEmployeesData();
         employeeBook.dismissEmployee("Батиков", "Евгеша", "Батикович");
 //        employeeBook.printEmployeesData();
         employeeBook.dismissEmployee(2);
-//        employeeBook.changeEmployeesSalary("Батиков", "Евгеша", "Батикович", 50_000);
+        employeeBook.changeEmployeesSalary("Батиков", "Евгеша", "Батикович", 50_000);
+//        employeeBook.changeEmployeesSalary(4, 50_000);
+        employeeBook.changeEmployeeDepartment(5, "4");
         employeeBook.printEmployeesData();
 
     }

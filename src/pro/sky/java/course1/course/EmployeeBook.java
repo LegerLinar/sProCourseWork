@@ -258,6 +258,44 @@ public class EmployeeBook {
 
 //    –––––––––––––––––––– Last Level –––––––––––––––––––––––
 
+    int searchEmployee(String surname, String name, String patronymic) {
+        String searchedPerson = surname + " " + name + " " + patronymic;
+        boolean employeeFound = false;
+        int employeeFoundIndex = 0;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getEmployeeInitials().contentEquals(searchedPerson)) {
+                employeeFound = true;
+                break;
+            }
+            employeeFoundIndex++;
+        }
+        if (employeeFound) {
+            return employeeFoundIndex;
+        } else {
+            return -1;
+        }
+
+    }
+
+    int searchEmployee(int id) {
+        int searchedPersonId = id;
+        boolean employeeFound = false;
+        int employeeFoundIndex = 0;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getId() == id) {
+                employeeFound = true;
+                break;
+            }
+            employeeFoundIndex++;
+        }
+        if (employeeFound) {
+            return employeeFoundIndex;
+        } else {
+            return -1;
+        }
+    }
+
+    //    /\/\/\/\/\/\/\/\/\/\/\/\/\/\ util private methods /\/\/\/\/\/\/\/\/\/\/\/\/\/\
     public void addNewEmployee(String surname, String name, String patronymic, String department, int salary) {
         int voidSpotNumber = 0;
         boolean isVacancy = false;
@@ -277,72 +315,70 @@ public class EmployeeBook {
     }
 
     public void dismissEmployee(String surname, String name, String patronymic) {
-        Employee searchedPerson = searchEmployee(surname, name, patronymic);
-        if (searchedPerson != null) {
-            System.out.println("Сотрудник c id - " + searchedPerson.getId() + " уволен");
-            searchedPerson = null;
+        int foundEmployeeIndex = searchEmployee(surname, name, patronymic);
+        if (foundEmployeeIndex != -1) {
+            System.out.println("Сотрудник " + employees[foundEmployeeIndex].getEmployeeInitials() + " уволен");
+            employees[foundEmployeeIndex] = null;
         } else {
             throw new IllegalArgumentException("Сотрудник с такими ФИО не найден, попробуйте поиск по id");
         }
     }
 
     public void dismissEmployee(int id) {
-        Employee searchedPersonById = searchEmployee(id);
+        int foundEmployeeIndex = searchEmployee(id);
 
-        if (searchedPersonById != null) {
-            System.out.println("Сотрудник " + searchedPersonById.getEmployeeInitials() + " уволен");
-            searchedPersonById = null;
+        if (foundEmployeeIndex != -1) {
+            System.out.println("Сотрудник " + employees[foundEmployeeIndex].getEmployeeInitials() + " уволен");
+            employees[foundEmployeeIndex] = null;
         } else {
             throw new IllegalArgumentException("Сотрудник с таким id не найден, попробуйте поиск по ФИО");
         }
     }
 
-    Employee searchEmployee(String surname, String name, String patronymic) {
-        String searchedPerson = surname + " " + name + " " + patronymic;
-        boolean employeeFound = false;
-        int employeeFoundIndex = 0;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getEmployeeInitials().contentEquals(searchedPerson)) {
-                employeeFound = true;
-                break;
-            }
-            employeeFoundIndex++;
-        }
-        if (employeeFound) {
-            return employees[employeeFoundIndex];
-        } else {
-            return null;
-        }
-
-    }
-
-    Employee searchEmployee(int id) {
-        int searchedPersonId = id;
-        boolean employeeFound = false;
-        int employeeFoundIndex = 0;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getId() == id) {
-                employeeFound = true;
-                break;
-            }
-            employeeFoundIndex++;
-        }
-        if (employeeFound) {
-            return employees[employeeFoundIndex];
-        } else {
-            return null;
-        }
-    }
 
     public void changeEmployeesSalary(String surname, String name, String patronymic, int changeSalary) {
 
-        Employee searchedEmployee = searchEmployee(surname, name, patronymic);
-        if (searchedEmployee != null) {
-            searchedEmployee.setSalary(searchedEmployee.getSalary() + changeSalary);
-            System.out.println("Зарплата сотрудника " + searchedEmployee.getEmployeeInitials() + " (id: " + searchedEmployee.getId() + ") изменена");
+        int foundEmployeeIndex = searchEmployee(surname, name, patronymic);
+        if (foundEmployeeIndex != -1) {
+            employees[foundEmployeeIndex].setSalary(employees[foundEmployeeIndex].getSalary() + changeSalary);
+            System.out.println("Зарплата сотрудника " + employees[foundEmployeeIndex].getEmployeeInitials() + " (id: " + employees[foundEmployeeIndex].getId() + ") изменена");
         } else {
             System.out.println("Сотрудник не найден");
         }
     }
+
+    public void changeEmployeesSalary(int id, int changeSalary) {
+
+        int foundEmployeeIndex = searchEmployee(id);
+        if (foundEmployeeIndex != -1) {
+            employees[foundEmployeeIndex].setSalary(employees[foundEmployeeIndex].getSalary() + changeSalary);
+            System.out.println("Зарплата сотрудника " + employees[foundEmployeeIndex].getEmployeeInitials() + " (id: " + employees[foundEmployeeIndex].getId() + ") изменена");
+        } else {
+            System.out.println("Сотрудник не найден");
+        }
+    }
+
+    public void changeEmployeeDepartment(String surname, String name, String patronymic, String department) {
+        int foundEmployeeIndex = searchEmployee(surname, name, patronymic);
+        if (foundEmployeeIndex != -1) {
+            employees[foundEmployeeIndex].setDepartment(department);
+            System.out.println("Сотрудник " + employees[foundEmployeeIndex].getEmployeeInitials() + " переведен в отдел " + employees[foundEmployeeIndex].getDepartment());
+        } else {
+            System.out.println("Сотрудник не найден");
+        }
+    }
+
+    public void changeEmployeeDepartment(int id, String department) {
+        isDepartment(department);
+        int foundEmployeeIndex = searchEmployee(id);
+        if (foundEmployeeIndex != -1) {
+            employees[foundEmployeeIndex].setDepartment(department);
+            System.out.println("Сотрудник " + employees[foundEmployeeIndex].getEmployeeInitials() + " переведен в отдел " + employees[foundEmployeeIndex].getDepartment());
+        } else {
+            System.out.println("Сотрудник не найден");
+        }
+    }
+
+
 //    –––––––––––––––––––––––– Class End ––––––––––––––––––––––––
 }
