@@ -313,35 +313,49 @@ public class EmployeeBook {
         }
     }
 
-    //    boolean searchEmployee(String surname, String name, String patronymic, int id) {
-//        String searchedPerson = surname + " " + name + " " + patronymic;
-//        boolean employeeFound = false;
-//        for (Employee employee : employees) {
-//            if (employee != null && employee.getEmployeeInitials().contentEquals(searchedPerson) || employee != null && employee.getId() == id) {
-//                employeeFound = true;
-//                break;
-//            }
-//        }
-//        return employeeFound;
-//    }
-    public void changeEmployeesSalary(String surname, String name, String patronymic, int changeSalary) {
+    Employee searchEmployee(String surname, String name, String patronymic) {
         String searchedPerson = surname + " " + name + " " + patronymic;
         boolean employeeFound = false;
-        String employeeFoundName = "";
-        int employeeFoundId = 0;
-
+        int employeeFoundIndex = 0;
         for (Employee employee : employees) {
             if (employee != null && employee.getEmployeeInitials().contentEquals(searchedPerson)) {
-                employee.setSalary(employee.getSalary() + changeSalary);
                 employeeFound = true;
-                employeeFoundName = employee.getEmployeeInitials();
-                employeeFoundId = employee.getId();
                 break;
             }
+            employeeFoundIndex++;
+        }
+        if (employeeFound) {
+            return employees[employeeFoundIndex];
+        } else {
+            return null;
         }
 
+    }
+
+    Employee searchEmployee(int id) {
+        int searchedPersonId = id;
+        boolean employeeFound = false;
+        int employeeFoundIndex = 0;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getId() == id) {
+                employeeFound = true;
+                break;
+            }
+            employeeFoundIndex++;
+        }
         if (employeeFound) {
-            System.out.println("Зарплата сотрудника " + employeeFoundName + " ( id " + employeeFoundId + ") изменена");
+            return employees[employeeFoundIndex];
+        } else {
+            return null;
+        }
+    }
+
+    public void changeEmployeesSalary(String surname, String name, String patronymic, int changeSalary) {
+
+        Employee searchedEmployee = searchEmployee(surname, name, patronymic);
+        if (searchedEmployee != null) {
+            searchedEmployee.setSalary(searchedEmployee.getSalary() + changeSalary);
+            System.out.println("Зарплата сотрудника " + searchedEmployee.getEmployeeInitials() + " (id: " + searchedEmployee.getId() + ") изменена");
         } else {
             System.out.println("Сотрудник не найден");
         }
