@@ -26,9 +26,12 @@ public class Main {
 //        findEmployeesMaxSalaryOfDep(employees, "5");
 //        countSummarySalaryOfDep(employees, "5");
 //        countAverageSalaryOfDep(employees, "1");
-        showEmployeesData(employees);
-        toIndexSalaryOfDep(employees, "5", 100);
-        showEmployeesData(employees);
+//        showEmployeesData(employees);
+//        toIndexSalaryOfDep(employees, "5", 100);
+//        showEmployeesData(employees);
+
+        printDepartment(employees, "5");
+
 
     }
 //     ------------------------------------- DEFAULT METHODS AND DATA -------------------------------------
@@ -208,6 +211,17 @@ public class Main {
 
     public static void toIndexSalaryOfDep(Employee[] employees, String department, int percent) {
         toIndexSalary(getEmployeesByDep(employees, department), percent);
+    }
+
+    public static void printDepartment(Employee[] employees, String department) {
+        isDepartment(employees, department);
+        System.out.println("Сотрудники отдела " + department);
+        for (Employee employee : getEmployeesByDep(employees, department)) {
+            if (employee == null) {
+                System.out.println("В отделе нет сотрудников");
+            }
+            System.out.println(employee.getEmployeeInitials() + ", заработная плата - " + employee.getSalary() + "руб. id - " + employee.getId());
+        }
     }
 
 //    -------------------------------------    class end -------------------------------------
