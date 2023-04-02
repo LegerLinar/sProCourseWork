@@ -276,38 +276,22 @@ public class EmployeeBook {
         }
     }
 
-    public void dismissEmployeeByFullName(String surname, String name, String patronymic) {
-        String searchedPerson = surname + " " + name + " " + patronymic;
-        int targetToDismissPlace = 0;
-        boolean isVictimFound = false;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getEmployeeInitials().contentEquals(searchedPerson)) {
-                isVictimFound = true;
-                break;
-            }
-            targetToDismissPlace++;
-        }
-        if (isVictimFound) {
-            employees[targetToDismissPlace] = null;
-            System.out.println("Сотрудник уволен");
+    public void dismissEmployee(String surname, String name, String patronymic) {
+        Employee searchedPerson = searchEmployee(surname, name, patronymic);
+        if (searchedPerson != null) {
+            System.out.println("Сотрудник c id - " + searchedPerson.getId() + " уволен");
+            searchedPerson = null;
         } else {
             throw new IllegalArgumentException("Сотрудник с такими ФИО не найден, попробуйте поиск по id");
         }
     }
 
-    public void dismissEmployeeById(int id) {
-        int targetToDismissPlace = 0;
-        boolean isVictimFound = false;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getId() == id) {
-                isVictimFound = true;
-                break;
-            }
-            targetToDismissPlace++;
-        }
-        if (isVictimFound) {
-            employees[targetToDismissPlace] = null;
-            System.out.println("Сотрудник уволен");
+    public void dismissEmployee(int id) {
+        Employee searchedPersonById = searchEmployee(id);
+
+        if (searchedPersonById != null) {
+            System.out.println("Сотрудник " + searchedPersonById.getEmployeeInitials() + " уволен");
+            searchedPersonById = null;
         } else {
             throw new IllegalArgumentException("Сотрудник с таким id не найден, попробуйте поиск по ФИО");
         }

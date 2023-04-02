@@ -35,12 +35,12 @@ public class Main {
 //        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
 //        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
 //        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
-//        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000); ------- а вот это уже перебор
+        employeeBook.addNewEmployee("Батиков", "Евгеша", "Батикович", "2", 1_000_000);
 //        employeeBook.printEmployeesData();
-//        employeeBook.dismissEmployeeByFullName("Батиков", "Евгеша", "Батикович");
+        employeeBook.dismissEmployee("Батиков", "Евгеша", "Батикович");
 //        employeeBook.printEmployeesData();
-//        employeeBook.dismissEmployeeById(2);
-        employeeBook.changeEmployeesSalary("Батиков", "Евгеша", "Батикович", 50_000);
+        employeeBook.dismissEmployee(2);
+//        employeeBook.changeEmployeesSalary("Батиков", "Евгеша", "Батикович", 50_000);
         employeeBook.printEmployeesData();
 
     }
