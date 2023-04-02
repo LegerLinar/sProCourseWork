@@ -4,32 +4,29 @@ public class Main {
     public static void main(String[] args) {
 
         EmployeeBook employeeBook = new EmployeeBook();
-//        System.out.println(findEmployeeMaxSalary(employees));
-//        System.out.println(findEmployeeMinSalary(employees));
+//        System.out.println(employeeBook.findEmployeeMaxSalary());
+//        System.out.println(employeeBook.findEmployeeMinSalary());
 //        employeeBook.showEmployeesData();
-//        System.out.println(countMonthSalaryExpenses(employees));
-//        System.out.println(countAverageMonthSalary(employees));
-//        showEmployeesNames(employees);
+//        System.out.println(employeeBook.countMonthSalaryExpenses());
+//        System.out.println(employeeBook.countAverageMonthSalary());
+//        employeeBook.showEmployeesNames();
 
         //     ------------------------------------- NEXT LEVEL CALLS AND DATA -------------------------------------
 
-//        employees[1] = new Employee("Франклин", "Бенджамин", "Батькович", "5", 200_000);
-//        employees[3] = new Employee("Джугашвили", "Иосиф", "Виссарионович", "5", 1_000);
-//        employees[5] = new Employee("Хирохито", "Сёма", "Ёсихитович", "4", 100_000);
 
-//        getEmployees().toIndexSalary(11);
-//        showEmployeesData(employees);
+//        employeeBook.toIndexSalary(25);
+//        employeeBook.showEmployeesData();
 //        employeeBook.findEmployeesMinSalaryByDep("5");
-//        findEmployeesMaxSalaryOfDep(employees, "5");
-//        countSummarySalaryOfDep(employees, "5");
-//        countAverageSalaryOfDep(employees, "1");
-//        showEmployeesData(employees);
-//        toIndexSalaryOfDep(employees, "5", 100);
-//        showEmployeesData(employees);
-
-        employeeBook.printDepartment("2");
-//        printWhoEarnLess(employees, 50000);
-//        printWhoEarnMore(employees, 70_000);
+//        employeeBook.findEmployeesMaxSalaryOfDep("5");
+//        employeeBook.countSummarySalaryOfDep("5");
+//        employeeBook.countAverageSalaryOfDep("1");
+//        employeeBook.showEmployeesData();
+//        employeeBook.toIndexSalaryOfDep("5", 100);
+//        employeeBook.showEmployeesData();
+//
+//        employeeBook.printDepartment("1");
+//        employeeBook.printWhoEarnLess(50000);
+//        employeeBook.printWhoEarnMore(70_000);
 
 
     }
