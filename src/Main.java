@@ -13,6 +13,7 @@ public class Main {
         EmployeeBook employeeBook = new EmployeeBook();
 //        System.out.println(employeeBook.countMonthSalaryExpenses());
 //        System.out.println(employeeBook.findEmployeeMinSalary());
+//        System.out.println(employeeBook.getEmployeesByDep("5"));
 
 
 //        employeeBook.printAllEmployeesData();

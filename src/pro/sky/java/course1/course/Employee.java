@@ -1,6 +1,8 @@
 package pro.sky.java.course1.course;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Employee {
     private String surname;
@@ -12,7 +14,7 @@ public class Employee {
 
     private static int idCounter = 1;
 
-    private final String[] departments = {"1", "2", "3", "4", "5"};
+    static final Set<String> departments = new HashSet<>(Set.of("1", "2", "3", "4", "5"));
 
 
 
@@ -33,19 +35,7 @@ public class Employee {
     // ------------------ own utily methods ---------------------
 
     public boolean isDepartmentExist(String department) {
-        String departmentNameHolder = "";
-
-        for (String departmentName : departments) {
-            if (departmentName.contentEquals(department)) {
-                departmentNameHolder = department;
-                break;
-            }
-        }
-        if (departmentNameHolder.equals("")) {
-            return false;
-        } else {
-            return true;
-        }
+        return departments.contains(department);
     }
 
     public String getEmployeeInitials() {
@@ -82,7 +72,7 @@ public class Employee {
         return id;
     }
 
-    public String[] getDepartments() {
+    public Set<String> getDepartments() {
         return departments;
     }
 
