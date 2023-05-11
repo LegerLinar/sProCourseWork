@@ -116,8 +116,9 @@ public class Employee {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(surname, name, patronymic);
     }
-//    ------------------------------------- class end -------------------------------------
+
+    //    ------------------------------------- class end -------------------------------------
 
 }

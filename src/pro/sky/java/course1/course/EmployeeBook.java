@@ -1,36 +1,39 @@
 package pro.sky.java.course1.course;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class EmployeeBook {
-    private Employee[] employees;
+    private Map<String, Employee> employeeMap;
+
 
     public EmployeeBook() {
-        employees = new Employee[10];
-        employees[0] = new Employee("Кисложопкин", "Аркадий", "Васильевич", "1", 35000);
-        employees[2] = new Employee("Селиванов", "Акакий", "Александрович", "4", 32000);
-        employees[3] = new Employee("Кулиджи", "Казимир", "Космосович", "3", 42000);
-        employees[4] = new Employee("Франклин", "Бенджамин", "Батькович", "5", 200_000);
-        employees[5] = new Employee("Джугашвили", "Иосиф", "Виссарионович", "5", 1_000);
-        employees[6] = new Employee("Хирохито", "Сёма", "Ёсихитович", "4", 100_000);
+        employeeMap = new HashMap<>(Map.of(
+                "Кисложопкин Аркадий Васильевич",
+                new Employee("Кисложопкин", "Аркадий", "Васильевич", "1", 35000),
+                "Селиванов Акакий Александрович",
+                new Employee("Селиванов", "Акакий", "Александрович", "4", 32000),
+                "Кулиджи Казимир Космосович",
+                new Employee("Кулиджи", "Казимир", "Космосович", "3", 42000),
+                "Франклин Бенджамин Батькович",
+                new Employee("Франклин", "Бенджамин", "Батькович", "5", 200_000),
+                "Джугашвили Иосиф Виссарионович",
+                new Employee("Джугашвили", "Иосиф", "Виссарионович", "5", 1_000),
+                "Хирохито Сёма Ёсихитович",
+                new Employee("Хирохито", "Сёма", "Ёсихитович", "4", 100_000)
+        ));
     }
 
 //
 
-    public Employee[] getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Employee[] employees) {
-        this.employees = employees;
+    public Map<String, Employee> getEmployees() {
+        return employeeMap;
     }
 
     public void printAllEmployeesData() {
         System.out.println("Личный состав:");
-        for (Employee employee : employees) {
-            if (employee != null) {
-                System.out.println(employee);
-            } else {
-                System.out.println("Вакантное место");
-            }
+        for (Employee employee : employeeMap.values()) {
+            System.out.println(employee);
         }
     }
 
@@ -417,5 +420,6 @@ public class EmployeeBook {
     }
 
 
-//    –––––––––––––––––––––––– Class End ––––––––––––––––––––––––
+    ––––––––––––––––––––––––
+    Class End ––––––––––––––––––––––––
 }
