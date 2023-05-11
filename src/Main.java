@@ -11,7 +11,11 @@ public class Main {
 //4. Переработать все методы по работе с хранилищем на работу с методами Map.
 
         EmployeeBook employeeBook = new EmployeeBook();
-        employeeBook.printAllEmployeesData();
+//        System.out.println(employeeBook.countMonthSalaryExpenses());
+//        System.out.println(employeeBook.findEmployeeMinSalary());
+
+
+//        employeeBook.printAllEmployeesData();
 //        System.out.println(employeeBook.findEmployeeMaxSalary());
 //        System.out.println(employeeBook.findEmployeeMinSalary());
 //        employeeBook.printAllEmployeesData();

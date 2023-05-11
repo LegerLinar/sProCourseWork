@@ -39,10 +39,9 @@ public class EmployeeBook {
 
     public int countMonthSalaryExpenses() {
         int monthSalaryExpenses = 0;
-        for (Employee employee : employees) {
-            if (employee != null) {
-                monthSalaryExpenses += employee.getSalary();
-            }
+        for (Employee employee :
+                employeeMap.values()) {
+            monthSalaryExpenses += employee.getSalary();
         }
         return monthSalaryExpenses;
     }
@@ -50,8 +49,8 @@ public class EmployeeBook {
     public String findEmployeeMinSalary() {
         int minSalary = 0;
         String employeeWithMinSalary = "";
-        for (Employee employee : employees) {
-            if (employee != null && employee.getSalary() < minSalary || minSalary == 0 && employee != null) {
+        for (Employee employee : employeeMap.values()) {
+            if (employee.getSalary() < minSalary || minSalary == 0) {
                 minSalary = employee.getSalary();
                 employeeWithMinSalary = employee.toString();
             }
@@ -63,8 +62,8 @@ public class EmployeeBook {
     public String findEmployeeMaxSalary() {
         int maxSalary = 0;
         String employeeWithMaxSalary = "";
-        for (Employee employee : employees) {
-            if (employee != null && employee.getSalary() > maxSalary) {
+        for (Employee employee : employeeMap.values()) {
+            if (employee.getSalary() > maxSalary) {
                 maxSalary = employee.getSalary();
                 employeeWithMaxSalary = employee.toString();
             }
@@ -75,24 +74,18 @@ public class EmployeeBook {
     public int countAverageMonthSalary() {
         int totalMonthSalary = 0;
         int employeesCounter = 0;
-        for (Employee employee : employees) {
-            if (employee != null) {
-                totalMonthSalary += employee.getSalary();
-                employeesCounter++;
-            }
+        for (Employee employee : employeeMap.values()) {
+            totalMonthSalary += employee.getSalary();
+            employeesCounter++;
         }
         return totalMonthSalary / employeesCounter;
     }
 
     public void showEmployeesNames() {
         StringBuilder employeesString = new StringBuilder();
-        for (Employee employee : employees) {
-
-            if (employee != null) {
-                employeesString.append(employee.getEmployeeInitials()).append("\n");
-            }
+        for (String employee : employeeMap.keySet()) {
+            System.out.println(employee);
         }
-        System.out.println(employeesString);
     }
 
 
