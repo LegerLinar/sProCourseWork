@@ -14,7 +14,10 @@ public class Main {
 //        System.out.println(employeeBook.countMonthSalaryExpenses());
 //        System.out.println(employeeBook.findEmployeeMinSalary());
 //        System.out.println(employeeBook.getEmployeesByDep("5"));
-
+        employeeBook.addNewEmployee("Какашинский", "Пётр", "Валерьевич", "2", 1500);
+        employeeBook.dismissEmployee(7);
+        employeeBook.printAllDepartmentPersonnel();
+//        System.out.println(employeeBook.searchEmployee("Какашинский", "Пётр", "Валерьевич"));
 
 //        employeeBook.printAllEmployeesData();
 //        System.out.println(employeeBook.findEmployeeMaxSalary());
