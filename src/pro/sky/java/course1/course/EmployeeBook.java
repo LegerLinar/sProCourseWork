@@ -1,45 +1,46 @@
 package pro.sky.java.course1.course;
 
+import java.util.*;
+
 public class EmployeeBook {
-    private Employee[] employees;
+    private Map<String, Employee> employeeMap;
+
 
     public EmployeeBook() {
-        employees = new Employee[10];
-        employees[0] = new Employee("Кисложопкин", "Аркадий", "Васильевич", "1", 35000);
-        employees[2] = new Employee("Селиванов", "Акакий", "Александрович", "4", 32000);
-        employees[3] = new Employee("Кулиджи", "Казимир", "Космосович", "3", 42000);
-        employees[4] = new Employee("Франклин", "Бенджамин", "Батькович", "5", 200_000);
-        employees[5] = new Employee("Джугашвили", "Иосиф", "Виссарионович", "5", 1_000);
-        employees[6] = new Employee("Хирохито", "Сёма", "Ёсихитович", "4", 100_000);
+        employeeMap = new HashMap<>(Map.of(
+                "Кисложопкин Аркадий Васильевич",
+                new Employee("Кисложопкин", "Аркадий", "Васильевич", "1", 35000),
+                "Селиванов Акакий Александрович",
+                new Employee("Селиванов", "Акакий", "Александрович", "4", 32000),
+                "Кулиджи Казимир Космосович",
+                new Employee("Кулиджи", "Казимир", "Космосович", "3", 42000),
+                "Франклин Бенджамин Батькович",
+                new Employee("Франклин", "Бенджамин", "Батькович", "5", 200_000),
+                "Джугашвили Иосиф Виссарионович",
+                new Employee("Джугашвили", "Иосиф", "Виссарионович", "5", 1_000),
+                "Хирохито Сёма Ёсихитович",
+                new Employee("Хирохито", "Сёма", "Ёсихитович", "4", 100_000)
+        ));
     }
 
 //
 
-    public Employee[] getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Employee[] employees) {
-        this.employees = employees;
+    public Map<String, Employee> getEmployees() {
+        return employeeMap;
     }
 
     public void printAllEmployeesData() {
         System.out.println("Личный состав:");
-        for (Employee employee : employees) {
-            if (employee != null) {
-                System.out.println(employee);
-            } else {
-                System.out.println("Вакантное место");
-            }
+        for (Employee employee : employeeMap.values()) {
+            System.out.println(employee);
         }
     }
 
     public int countMonthSalaryExpenses() {
         int monthSalaryExpenses = 0;
-        for (Employee employee : employees) {
-            if (employee != null) {
-                monthSalaryExpenses += employee.getSalary();
-            }
+        for (Employee employee :
+                employeeMap.values()) {
+            monthSalaryExpenses += employee.getSalary();
         }
         return monthSalaryExpenses;
     }
@@ -47,8 +48,8 @@ public class EmployeeBook {
     public String findEmployeeMinSalary() {
         int minSalary = 0;
         String employeeWithMinSalary = "";
-        for (Employee employee : employees) {
-            if (employee != null && employee.getSalary() < minSalary || minSalary == 0 && employee != null) {
+        for (Employee employee : employeeMap.values()) {
+            if (employee.getSalary() < minSalary || minSalary == 0) {
                 minSalary = employee.getSalary();
                 employeeWithMinSalary = employee.toString();
             }
@@ -60,8 +61,8 @@ public class EmployeeBook {
     public String findEmployeeMaxSalary() {
         int maxSalary = 0;
         String employeeWithMaxSalary = "";
-        for (Employee employee : employees) {
-            if (employee != null && employee.getSalary() > maxSalary) {
+        for (Employee employee : employeeMap.values()) {
+            if (employee.getSalary() > maxSalary) {
                 maxSalary = employee.getSalary();
                 employeeWithMaxSalary = employee.toString();
             }
@@ -72,24 +73,18 @@ public class EmployeeBook {
     public int countAverageMonthSalary() {
         int totalMonthSalary = 0;
         int employeesCounter = 0;
-        for (Employee employee : employees) {
-            if (employee != null) {
-                totalMonthSalary += employee.getSalary();
-                employeesCounter++;
-            }
+        for (Employee employee : employeeMap.values()) {
+            totalMonthSalary += employee.getSalary();
+            employeesCounter++;
         }
         return totalMonthSalary / employeesCounter;
     }
 
     public void showEmployeesNames() {
         StringBuilder employeesString = new StringBuilder();
-        for (Employee employee : employees) {
-
-            if (employee != null) {
-                employeesString.append(employee.getEmployeeInitials()).append("\n");
-            }
+        for (String employee : employeeMap.keySet()) {
+            System.out.println(employee);
         }
-        System.out.println(employeesString);
     }
 
 
@@ -97,7 +92,7 @@ public class EmployeeBook {
 
     public void isDepartment(String department) {
         byte verifier = 0;
-        for (Employee employee : employees) {
+        for (Employee employee : employeeMap.values()) {
             if (employee != null && employee.isDepartmentExist(department)) {
                 verifier++;
                 break;
@@ -109,39 +104,27 @@ public class EmployeeBook {
     }
     //проверка на существование отдела
 
-    public Employee[] getEmployeesByDep(String department) {
-//        вернет субмассив Employee[] сортированный по department.
+    public List<Employee> getEmployeesByDep(String department) {
         int subEmployeesCounter = 0;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment().equals(department)) {
-                subEmployeesCounter++;
+        List<Employee> subEmployeeList = new ArrayList<>(0);
+        for (Employee employee : employeeMap.values()) {
+            if (employee.getDepartment().contentEquals(department)) {
+                subEmployeeList.add(employee);
+
             }
         }
-        if (subEmployeesCounter == 0) {
+        if (subEmployeeList.isEmpty()) {
             System.out.println("В отделе нет сотрудников");
         }
-        Employee[] subEmployees = new Employee[subEmployeesCounter];
-
-        int subEmployeesIndexCounter = 0;
-
-        for (Employee employee : employees) {
-            if (employee != null && employee.getDepartment().equals(department)) {
-                subEmployees[subEmployeesIndexCounter] = employee;
-                subEmployeesIndexCounter++;
-            }
-        }
-        return subEmployees;
+        return subEmployeeList;
     }
 //    создание субмассива отдела для поиска свойств экземпляра Employee в нем
 
     public void toIndexSalary(int percent) {
         int increaseAmount;
-        for (Employee employee : employees) {
-            if (employee != null) {
-                increaseAmount = employee.getSalary() * percent / 100;
-                employee.setSalary(employee.getSalary() + increaseAmount);
-
-            }
+        for (Employee employee : employeeMap.values()) {
+            increaseAmount = employee.getSalary() * percent / 100;
+            employee.setSalary(employee.getSalary() + increaseAmount);
         }
     }
 
@@ -213,7 +196,6 @@ public class EmployeeBook {
 
             }
         }
-        ;
     }
 
     public void printDepartment(String department) {
@@ -231,8 +213,8 @@ public class EmployeeBook {
     public void printWhoEarnLess(int salary) {
         System.out.println("Сотрудники зарабатывающие менее " + salary + " руб.");
         int existCounter = 0;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getSalary() < salary) {
+        for (Employee employee : employeeMap.values()) {
+            if (employee.getSalary() < salary) {
                 existCounter = employee.getSalary();
                 System.out.println(employee);
             }
@@ -245,8 +227,8 @@ public class EmployeeBook {
     public void printWhoEarnMore(int salary) {
         System.out.println("Сотрудники зарабатывающие более " + salary + " руб.");
         int existCounter = 0;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getSalary() >= salary) {
+        for (Employee employee : employeeMap.values()) {
+            if (employee.getSalary() >= salary) {
                 existCounter = employee.getSalary();
                 System.out.println(employee);
             }
@@ -258,90 +240,51 @@ public class EmployeeBook {
 
 //    –––––––––––––––––––– Last Level –––––––––––––––––––––––
 
-    int searchEmployee(String surname, String name, String patronymic) {
-        String searchedPerson = surname + " " + name + " " + patronymic;
-        boolean employeeFound = false;
-        int employeeFoundIndex = 0;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getEmployeeInitials().contentEquals(searchedPerson)) {
-                employeeFound = true;
-                break;
-            }
-            employeeFoundIndex++;
-        }
-        if (employeeFound) {
-            return employeeFoundIndex;
-        } else {
-            return -1;
-        }
+    Employee searchEmployee(String surname, String name, String patronymic) {
+        return employeeMap.get(surname + " " + name + " " + patronymic);
 
     }
 
-    int searchEmployee(int id) {
-        int searchedPersonId = id;
-        boolean employeeFound = false;
-        int employeeFoundIndex = 0;
-        for (Employee employee : employees) {
-            if (employee != null && employee.getId() == id) {
-                employeeFound = true;
-                break;
+    Employee searchEmployee(int id) {
+        for (Employee employee : employeeMap.values()) {
+            if (employee.getId() == id) {
+                return employee;
             }
-            employeeFoundIndex++;
         }
-        if (employeeFound) {
-            return employeeFoundIndex;
-        } else {
-            return -1;
-        }
+        return null;
     }
 
     //    /\/\/\/\/\/\/\/\/\/\/\/\/\/\ util private methods /\/\/\/\/\/\/\/\/\/\/\/\/\/\
     public void addNewEmployee(String surname, String name, String patronymic, String department, int salary) {
-        int voidSpotNumber = 0;
-        boolean isVacancy = false;
-        for (Employee employee : employees) {
-            if (employee == null) {
-                isVacancy = true;
-                break;
-            }
-            voidSpotNumber++;
-        }
-        if (isVacancy) {
-            employees[voidSpotNumber] = new Employee(surname, name, patronymic, department, salary);
-            System.out.println("Сотрудник добавлен");
-        } else {
-            throw new RuntimeException("Свободных вакансий нет. Чтобы нанять кого-то нужного, нужно сначала уволить кого-нибудь ненужного");
-        }
+        employeeMap.put(surname + " " + name + " " + patronymic, new Employee(surname, name, patronymic, department, salary));
+        System.out.println("Добавлен");
     }
 
     public void dismissEmployee(String surname, String name, String patronymic) {
-        int foundEmployeeIndex = searchEmployee(surname, name, patronymic);
-        if (foundEmployeeIndex != -1) {
-            System.out.println("Сотрудник " + employees[foundEmployeeIndex].getEmployeeInitials() + " уволен");
-            employees[foundEmployeeIndex] = null;
+        if (employeeMap.remove(surname + " " + name + " " + patronymic) == null) {
+            System.out.println("Сотрудник не найден");
         } else {
-            throw new IllegalArgumentException("Сотрудник с такими ФИО не найден, попробуйте поиск по id");
+            System.out.println("Сотрудник уволен");
         }
     }
 
     public void dismissEmployee(int id) {
-        int foundEmployeeIndex = searchEmployee(id);
 
-        if (foundEmployeeIndex != -1) {
-            System.out.println("Сотрудник " + employees[foundEmployeeIndex].getEmployeeInitials() + " уволен");
-            employees[foundEmployeeIndex] = null;
+        if (searchEmployee(id) != null) {
+            employeeMap.remove(searchEmployee(id).getEmployeeInitials());
+            System.out.println("Сотрудник уволен");
         } else {
-            throw new IllegalArgumentException("Сотрудник с таким id не найден, попробуйте поиск по ФИО");
+            System.out.println("Сотрудник не найден");
         }
     }
 
 
     public void changeEmployeesSalary(String surname, String name, String patronymic, int changeSalary) {
 
-        int foundEmployeeIndex = searchEmployee(surname, name, patronymic);
-        if (foundEmployeeIndex != -1) {
-            employees[foundEmployeeIndex].setSalary(employees[foundEmployeeIndex].getSalary() + changeSalary);
-            System.out.println("Зарплата сотрудника " + employees[foundEmployeeIndex].getEmployeeInitials() + " (id: " + employees[foundEmployeeIndex].getId() + ") изменена");
+        Employee employee = searchEmployee(surname, name, patronymic);
+        if (employee != null) {
+            employee.setSalary(employee.getSalary() + changeSalary);
+            System.out.println("Зарплата сотрудника " + employee.getEmployeeInitials() + " (id: " + employee.getId() + ") изменена");
         } else {
             System.out.println("Сотрудник не найден");
         }
@@ -349,58 +292,45 @@ public class EmployeeBook {
 
     public void changeEmployeesSalary(int id, int changeSalary) {
 
-        int foundEmployeeIndex = searchEmployee(id);
-        if (foundEmployeeIndex != -1) {
-            employees[foundEmployeeIndex].setSalary(employees[foundEmployeeIndex].getSalary() + changeSalary);
-            System.out.println("Зарплата сотрудника " + employees[foundEmployeeIndex].getEmployeeInitials() + " (id: " + employees[foundEmployeeIndex].getId() + ") изменена");
+        Employee employee = searchEmployee(id);
+        if (employee != null) {
+            employee.setSalary(employee.getSalary() + changeSalary);
+            System.out.println("Зарплата сотрудника " + employee.getEmployeeInitials() + " (id: " + employee.getId() + ") изменена");
         } else {
             System.out.println("Сотрудник не найден");
         }
     }
 
+    //
     public void changeEmployeeDepartment(String surname, String name, String patronymic, String department) {
-        int foundEmployeeIndex = searchEmployee(surname, name, patronymic);
-        if (foundEmployeeIndex != -1) {
-            employees[foundEmployeeIndex].setDepartment(department);
-            System.out.println("Сотрудник " + employees[foundEmployeeIndex].getEmployeeInitials() + " переведен в отдел " + employees[foundEmployeeIndex].getDepartment());
+        Employee employee = searchEmployee(surname, name, patronymic);
+        if (employee != null) {
+            employee.setDepartment(department);
+            System.out.println("Сотрудник " + employee.getEmployeeInitials() + " переведен в отдел " + employee.getDepartment());
         } else {
             System.out.println("Сотрудник не найден");
         }
     }
 
+    //
     public void changeEmployeeDepartment(int id, String department) {
         isDepartment(department);
-        int foundEmployeeIndex = searchEmployee(id);
-        if (foundEmployeeIndex != -1) {
-            employees[foundEmployeeIndex].setDepartment(department);
-            System.out.println("Сотрудник " + employees[foundEmployeeIndex].getEmployeeInitials() + " переведен в отдел " + employees[foundEmployeeIndex].getDepartment());
+        Employee employee = searchEmployee(id);
+        if (employee != null) {
+            employee.setDepartment(department);
+            System.out.println("Сотрудник " + employee.getEmployeeInitials() + " переведен в отдел " + employee.getDepartment());
         } else {
             System.out.println("Сотрудник не найден");
         }
     }
 
-    public String[] printActualDepartments() {
-        int departmentsAmount = 0;
-        for (Employee employee : employees) {
-            if (employee != null) {
-                departmentsAmount = employee.getDepartments().length;
-                break;
-            }
-        }
-        String[] actualDepartments = new String[departmentsAmount];
-        for (Employee employee : employees) {
-            if (employee != null) {
-                for (int i = 0; i < employee.getDepartments().length; i++) {
-                    actualDepartments[i] = employee.getDepartments()[i];
-                }
+    //
+    public Set<String> printActualDepartments() {
 
-                break;
-            }
-        }
-
-        return actualDepartments;
+        return Employee.departments;
     }
 
+    //
     public void printAllDepartmentPersonnel() {
 
         for (String actualDepartment : printActualDepartments()) {
@@ -415,7 +345,8 @@ public class EmployeeBook {
             }
         }
     }
-
-
-//    –––––––––––––––––––––––– Class End ––––––––––––––––––––––––
+//
+//
+//    –––––––––––––––––––––––
+//    Class End ––––––––––––––––––––––––
 }

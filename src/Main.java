@@ -3,7 +3,23 @@ import pro.sky.java.course1.course.EmployeeBook;
 public class Main {
     public static void main(String[] args) {
 
+// 1. Перенести проект с EmployeeBook на Map в качестве хранилища сотрудников,
+// реализовав методы добавления, удаления и поиска.
+//2. Продумать контракт для ключей, чтобы сотрудник
+// с одним ФИО существовал только в одном экземпляре, корректно добавлялся и удалялся.
+//3. Избавиться от циклов в методах по поиску сотрудника, заменив на методы Map.
+//4. Переработать все методы по работе с хранилищем на работу с методами Map.
+
         EmployeeBook employeeBook = new EmployeeBook();
+//        System.out.println(employeeBook.countMonthSalaryExpenses());
+//        System.out.println(employeeBook.findEmployeeMinSalary());
+//        System.out.println(employeeBook.getEmployeesByDep("5"));
+        employeeBook.addNewEmployee("Какашинский", "Пётр", "Валерьевич", "2", 1500);
+        employeeBook.dismissEmployee(7);
+        employeeBook.printAllDepartmentPersonnel();
+//        System.out.println(employeeBook.searchEmployee("Какашинский", "Пётр", "Валерьевич"));
+
+//        employeeBook.printAllEmployeesData();
 //        System.out.println(employeeBook.findEmployeeMaxSalary());
 //        System.out.println(employeeBook.findEmployeeMinSalary());
 //        employeeBook.printAllEmployeesData();
@@ -42,7 +58,7 @@ public class Main {
 //        employeeBook.changeEmployeesSalary("Батиков", "Евгеша", "Батикович", 50_000);
 //        employeeBook.changeEmployeesSalary(4, 50_000);
 //        employeeBook.changeEmployeeDepartment(5, "4");
-        employeeBook.printAllDepartmentPersonnel();
+//        employeeBook.printAllDepartmentPersonnel();
     }
 
 //    -------------------------------------    class end -------------------------------------
